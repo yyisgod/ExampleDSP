@@ -38,7 +38,8 @@
 
 #include "gdiplus.h"			//Gdi+ м╥нд╪Ч
 using namespace Gdiplus; 
-
+#include <vector>
+using namespace std;
 
 
 

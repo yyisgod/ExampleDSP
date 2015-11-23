@@ -47,6 +47,11 @@ private:
 	// 内存中绘制图像
 	void PreDrawImage(void);
 	Bitmap* m_pBitmap;
+public:
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+private:
+	// //计算共生矩阵参数
+	std::vector<double> calculateGLCM(Bitmap* pBitmap, CPoint firstPoint, CPoint secondPoint);
 };
 
 #ifndef _DEBUG  // ExampleDSPView.cpp 中的调试版本

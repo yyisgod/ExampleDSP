@@ -25,6 +25,7 @@ BEGIN_MESSAGE_MAP(CExampleDSPView, CView)
 	ON_WM_CONTEXTMENU()
 	ON_WM_RBUTTONUP()
 	ON_COMMAND(ID_FILE_OPEN, &CExampleDSPView::OnFileOpen)
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // CExampleDSPView 构造/析构
@@ -135,4 +136,50 @@ void CExampleDSPView::PreDrawImage(void)
 	graph->DrawImage(&image, 0, 0, image.GetWidth(), image.GetHeight());
 	if(graph)
 		delete graph;
+}
+
+
+void CExampleDSPView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	static bool flag = false;
+	static CPoint firstPoint;
+	if(!flag) {//第一次按下
+		firstPoint = point;
+		
+		//绘制初始点
+		Graphics* graph = Graphics::FromImage(m_pBitmap);
+		Pen pen(Color(255, 255, 0, 0));
+
+	   // Initialize the variables that define the ellipse.
+	   int x = point.x - 10;
+	   int y = point.y - 10;
+	   int width = 20;
+	   int height = 20;
+
+		// Draw the ellipse.
+		graph->DrawEllipse(&pen, x, y, width, height);
+		delete graph;
+		Invalidate();
+		flag = true;
+	} else {
+		//绘制矩阵，计算共生矩阵，绘制共生矩阵
+		Graphics* graph = Graphics::FromImage(m_pBitmap);
+		Pen pen(Color(255, 255, 0, 0));
+
+		// Draw the ellipse.
+		graph->DrawRectangle(&pen, firstPoint.x, firstPoint.y, point.x - firstPoint.x, point.y-firstPoint.y);
+		delete graph;
+		Invalidate();
+		calculateGLCM(m_pBitmap,firstPoint,point);
+		flag = false;
+	}
+	CView::OnLButtonDown(nFlags, point);
+}
+
+
+// //计算共生矩阵参数
+std::vector<double> CExampleDSPView::calculateGLCM(Bitmap* pBitmap, CPoint firstPoint, CPoint secondPoint)
+{
+	return vector<double>();
 }
