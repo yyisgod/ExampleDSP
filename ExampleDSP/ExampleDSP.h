@@ -36,6 +36,8 @@ public:
 private:
 	GdiplusStartupInput m_GdiplusStartupInput;
 	ULONG_PTR m_GdiplusToken;
+public:
+	virtual int ExitInstance();
 };
 
 extern CExampleDSPApp theApp;

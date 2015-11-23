@@ -40,6 +40,13 @@ protected:
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnFileOpen();
+private:
+	CString	m_ImageName;//图像名
+	// 内存中绘制图像
+	void PreDrawImage(void);
+	Bitmap* m_pBitmap;
 };
 
 #ifndef _DEBUG  // ExampleDSPView.cpp 中的调试版本
