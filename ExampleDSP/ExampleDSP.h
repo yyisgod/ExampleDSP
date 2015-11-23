@@ -33,6 +33,9 @@ public:
 
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
+private:
+	GdiplusStartupInput m_GdiplusStartupInput;
+	ULONG_PTR m_GdiplusToken;
 };
 
 extern CExampleDSPApp theApp;

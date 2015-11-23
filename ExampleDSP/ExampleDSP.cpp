@@ -126,6 +126,8 @@ BOOL CExampleDSPApp::InitInstance()
 	m_pMainWnd->UpdateWindow();
 	// 仅当具有后缀时才调用 DragAcceptFiles
 	//  在 SDI 应用程序中，这应在 ProcessShellCommand 之后发生
+
+	GdiplusStartup(&m_GdiplusToken, &m_GdiplusStartupInput, NULL);
 	return TRUE;
 }
 
@@ -192,3 +194,11 @@ void CExampleDSPApp::SaveCustomState()
 
 
 
+
+
+int CExampleDSPApp::ExitInstance()
+{
+	// TODO: 在此添加专用代码和/或调用基类
+	GdiplusShutdown(m_GdiplusToken);
+	return CWinAppEx::ExitInstance();
+}
